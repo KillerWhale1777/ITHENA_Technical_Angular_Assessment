@@ -16,14 +16,13 @@ const routes: Routes = [
     path: '',
     component: MainContainerComponent,
     children: [
-      // Define child routes if needed
+
     ]
   },
-  // Define other routes if needed
-  // ...
+
   {
     path: '**',
-    redirectTo: '', // Redirect to MainContainerComponent for unknown routes
+    redirectTo: '',
     pathMatch: 'full'
   }
 ];
@@ -40,7 +39,7 @@ const routes: Routes = [
   ],
   imports: [
     CommonModule,
-    RouterModule.forChild(routes), // Use forChild() since this is a feature module
+    RouterModule.forChild(routes),
     MaterialModuleModule,
   ],
   providers: [

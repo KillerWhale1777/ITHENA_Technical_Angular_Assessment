@@ -28,56 +28,53 @@ export class C3NewMmrComponent implements OnInit, OnDestroy {
 
   fetchDataForMonth(month: string | null): void {
     if (month) {
-      // Replace this with your actual logic to fetch data for the selected month
-      // For demonstration, we'll just update with static values
       if (month === 'January') {
-        this.newWinsData.currency = this.formatCurrency('25690'); // Example currency for January
-        this.newWinsData.percentage = 25; // Example percentage for January
+        this.newWinsData.currency = this.formatCurrency('25690');
+        this.newWinsData.percentage = 25;
       } else if (month === 'February') {
-        this.newWinsData.currency = this.formatCurrency('30000'); // Example currency for February
-        this.newWinsData.percentage = 30; // Example percentage for February
+        this.newWinsData.currency = this.formatCurrency('30000');
+        this.newWinsData.percentage = 30;
       }
       else if (month === 'March') {
-        this.newWinsData.currency = this.formatCurrency('60700'); // Example currency for February
-        this.newWinsData.percentage = 60; // Example percentage for February
+        this.newWinsData.currency = this.formatCurrency('60700');
+        this.newWinsData.percentage = 60;
       }
       else if (month === 'April') {
-        this.newWinsData.currency = this.formatCurrency('20000'); // Example currency for February
-        this.newWinsData.percentage = 30; // Example percentage for February
+        this.newWinsData.currency = this.formatCurrency('20000');
+        this.newWinsData.percentage = 30;
       }
       else if (month === 'May') {
-        this.newWinsData.currency = this.formatCurrency('40000'); // Example currency for February
-        this.newWinsData.percentage = 30; // Example percentage for February
+        this.newWinsData.currency = this.formatCurrency('40000');
+        this.newWinsData.percentage = 30;
       }
       else if (month === 'June') {
-        this.newWinsData.currency = this.formatCurrency('50000'); // Example currency for February
-        this.newWinsData.percentage = 30; // Example percentage for February
+        this.newWinsData.currency = this.formatCurrency('50000');
+        this.newWinsData.percentage = 30;
       }
       else if (month === 'July') {
-        this.newWinsData.currency = this.formatCurrency('70000'); // Example currency for February
-        this.newWinsData.percentage = 30; // Example percentage for February
+        this.newWinsData.currency = this.formatCurrency('70000');
+        this.newWinsData.percentage = 30;
       }
       else if (month === 'August') {
-        this.newWinsData.currency = this.formatCurrency('40000'); // Example currency for February
-        this.newWinsData.percentage = 30; // Example percentage for February
+        this.newWinsData.currency = this.formatCurrency('40000');
+        this.newWinsData.percentage = 30;
       }
       else if (month === 'September') {
-        this.newWinsData.currency = this.formatCurrency('80000'); // Example currency for February
-        this.newWinsData.percentage = 30; // Example percentage for February
+        this.newWinsData.currency = this.formatCurrency('80000');
+        this.newWinsData.percentage = 30;
       }
       else if (month === 'October') {
-        this.newWinsData.currency = this.formatCurrency('30440'); // Example currency for February
-        this.newWinsData.percentage = 30; // Example percentage for February
+        this.newWinsData.currency = this.formatCurrency('30440');
+        this.newWinsData.percentage = 30;
       }
       else if (month === 'November') {
-        this.newWinsData.currency = this.formatCurrency('60700'); // Example currency for February
-        this.newWinsData.percentage = 70; // Example percentage for February
+        this.newWinsData.currency = this.formatCurrency('60700');
+        this.newWinsData.percentage = 70;
       }
       else if (month === 'December') {
-        this.newWinsData.currency = this.formatCurrency('30000'); // Example currency for February
-        this.newWinsData.percentage = 50; // Example percentage for February
+        this.newWinsData.currency = this.formatCurrency('30000');
+        this.newWinsData.percentage = 50;
       }
-      // Add conditions for other months as needed
     }
   }
 
@@ -85,7 +82,6 @@ export class C3NewMmrComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  // Helper function to format currency with commas
   formatCurrency(value: string): string {
     return value.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }

@@ -59,7 +59,7 @@ export class C5ScatterChartComponent implements OnInit {
 
     const color = d3.scaleOrdinal()
       .domain(data.map(d => d.country))
-      .range(['#ead8ee', '#ffa128', '#fed094', '#b8cce7']); // Custom color codes
+      .range(['#ead8ee', '#ffa128', '#fed094', '#b8cce7']);
 
     svg.selectAll('.bubble')
       .data(data)
@@ -67,7 +67,7 @@ export class C5ScatterChartComponent implements OnInit {
       .attr('class', 'bubble')
       .attr('cx', d => x(d.population))
       .attr('cy', d => y(d.mmr))
-      .attr('r', 15) // Increase the circle radius
+      .attr('r', 15)
       .attr('fill', d => <any>color(d.country))
       .style('opacity', 0.7);
 
@@ -78,9 +78,9 @@ export class C5ScatterChartComponent implements OnInit {
     svg.append('g')
       .call(d3.axisLeft(y).tickFormat(d3.format('$.1f')).tickPadding(15).tickSize(0));
 
-    // Add legend
-    const legendWidth = 120; // Adjust this value as needed
-    const legendMargin = 10; // Add margin here
+
+    const legendWidth = 120;
+    const legendMargin = 10;
 
     const legend = svg.selectAll('.legend')
       .data(data)
@@ -127,7 +127,7 @@ export class C5ScatterChartComponent implements OnInit {
       .duration(1000)
       .attr('cx', (d: any) => x(d.population))
       .attr('cy', (d: any) => y(d.mmr))
-      .attr('r', 15) // Increase the circle radius
+      .attr('r', 15)
       .attr('fill', (d: any) => <any>color(d.country));
   }
   generateRandomData(month: string): { country: string, mmr: number, population: number }[] {
