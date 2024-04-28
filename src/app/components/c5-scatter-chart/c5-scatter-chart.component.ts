@@ -1,5 +1,7 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import * as d3 from 'd3';
+import { Subscription } from 'rxjs';
+import { DateSharingService } from 'src/app/services/date-sharing.service';
 
 @Component({
   selector: 'app-c5-scatter-chart',
@@ -7,10 +9,24 @@ import * as d3 from 'd3';
   styleUrls: ['./c5-scatter-chart.component.scss']
 })
 export class C5ScatterChartComponent implements OnInit {
-  constructor(private elementRef: ElementRef) { }
+
+  private subscription!: Subscription;
+  monthFilter: string | null = null;
+  private chartCreated: boolean = false;
+
+  constructor(private elementRef: ElementRef, private dateSharingService: DateSharingService) { }
 
   ngOnInit(): void {
-    this.createBubbleChart();
+    this.subscription = this.dateSharingService.monthFilter$.subscribe(month => {
+      this.monthFilter = month;
+      if (this.chartCreated) {
+        this.updateBubbleChart();
+      } else {
+        this.createBubbleChart();
+        this.chartCreated = true;
+      }
+    });
+
   }
 
   createBubbleChart() {
@@ -51,7 +67,7 @@ export class C5ScatterChartComponent implements OnInit {
       .attr('class', 'bubble')
       .attr('cx', d => x(d.population))
       .attr('cy', d => y(d.mmr))
-      .attr('r', 10)
+      .attr('r', 15) // Increase the circle radius
       .attr('fill', d => <any>color(d.country))
       .style('opacity', 0.7);
 
@@ -63,14 +79,14 @@ export class C5ScatterChartComponent implements OnInit {
       .call(d3.axisLeft(y).tickFormat(d3.format('$.1f')).tickPadding(15).tickSize(0));
 
     // Add legend
-    const legendWidth = 100; // Adjust this value as needed
-    const legendMargin = 20; // Add margin here
+    const legendWidth = 120; // Adjust this value as needed
+    const legendMargin = 10; // Add margin here
 
     const legend = svg.selectAll('.legend')
       .data(data)
       .enter().append('g')
       .attr('class', 'legend')
-      .attr('transform', (_, i) => `translate(${i * (legendWidth + legendMargin) + (legendWidth / 2)}, ${height + margin.bottom / 1})`);
+      .attr('transform', (_, i) => `translate(${i * (legendWidth + legendMargin) + (legendWidth / 2)}, ${height + margin.bottom / 1.3})`);
 
     legend.append('circle')
       .attr('cx', 0)
@@ -84,5 +100,42 @@ export class C5ScatterChartComponent implements OnInit {
       .attr('dy', '0.35em')
       .style('text-anchor', 'start')
       .text(d => d.country);
+  }
+
+  updateBubbleChart() {
+    const month = this.monthFilter || 'Default';
+    const data = this.generateRandomData(month);
+    const margin = { top: 20, right: 30, bottom: 50, left: 60 };
+    const svg = d3.select(this.elementRef.nativeElement).select('.bubble-chart');
+    const width = 600 - margin.left - margin.right;
+    const height = 400 - margin.top - margin.bottom;
+    const x = d3.scaleLinear()
+      .domain([0, 700])
+      .range([0, width]);
+
+    const y = d3.scaleLinear()
+      .domain([-2, 14])
+      .range([height, 0]);
+
+    const color = d3.scaleOrdinal()
+      .domain(data.map((d:any) => d.country))
+      .range(['#ead8ee', '#ffa128', '#fed094', '#b8cce7']);
+
+    svg.selectAll('.bubble')
+      .data(data)
+      .transition()
+      .duration(1000)
+      .attr('cx', (d: any) => x(d.population))
+      .attr('cy', (d: any) => y(d.mmr))
+      .attr('r', 15) // Increase the circle radius
+      .attr('fill', (d: any) => <any>color(d.country));
+  }
+  generateRandomData(month: string): { country: string, mmr: number, population: number }[] {
+    return [
+      { country: 'United States', mmr: Math.random() * 12, population: Math.random() * 700 },
+      { country: 'United Kingdom', mmr: Math.random() * 12, population: Math.random() * 700 },
+      { country: 'Australia', mmr: Math.random() * 12, population: Math.random() * 700 },
+      { country: 'Canada', mmr: Math.random() * 12, population: Math.random() * 700 }
+    ];
   }
 }
