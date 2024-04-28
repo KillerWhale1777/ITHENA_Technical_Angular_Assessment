@@ -128,6 +128,7 @@ export class C4PieChartComponent implements OnInit, OnDestroy {
         return 'translate(' + x + ',' + y + ')';
       })
       .attr('text-anchor', (d: any) => (d.startAngle + d.endAngle) / 2 > Math.PI ? 'end' : 'start')
+      .style('font-size', '10px')
       .text((d: any) => d.data.label);
   }
 
