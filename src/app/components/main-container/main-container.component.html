@@ -1,0 +1,41 @@
+<div class="full-page">
+  <div class="col-span-4 text-2xl">
+    Executive Dashboard
+  </div>
+  <div class="date-container p-2">
+    <span class="text-lg">Auto Date Range</span>
+    <div class="flex my-8">
+      <mat-icon (click)="toggleMonthList()">calendar_today</mat-icon>
+      <span class="flex flex-col justify-center items-center">{{selectedMonth}}</span>
+    </div>
+    <div *ngIf="showMonthList" class="month-list">
+      <ul>
+        <li *ngFor="let month of months" (click)="selectMonth(month)">{{ month }}</li>
+      </ul>
+    </div>
+  </div>
+  <div class="dashboard-main-content">
+    <div class="dashboard-top-container">
+      <div class="cards-container diagrams p-2">
+        <app-c1-new-wins></app-c1-new-wins>
+      </div>
+      <div class="cards-container diagrams p-2">
+        <app-c2-win-rate></app-c2-win-rate>
+      </div>
+      <div class="cards-container diagrams p-2">
+        <app-c3-new-mmr></app-c3-new-mmr>
+      </div>
+      <div class="cards-container diagrams p-2">
+        <app-c4-pie-chart></app-c4-pie-chart>
+      </div>
+    </div>
+    <div class="dashboard-below-container">
+      <div class="cards-container diagrams p-2">
+        <app-c5-scatter-chart></app-c5-scatter-chart>
+      </div>
+      <div class="cards-container diagrams p-2">
+        <app-c6-column-chart></app-c6-column-chart>
+      </div>
+    </div>
+  </div>
+</div>

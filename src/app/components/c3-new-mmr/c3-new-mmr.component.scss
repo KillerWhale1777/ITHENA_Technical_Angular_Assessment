@@ -1,0 +1,19 @@
+.full-width{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  position: relative;
+}
+.card-header{
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.icon{
+  color: #85ad7d;
+}
+.heading{
+  color:#bfbfbf
+}
