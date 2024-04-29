@@ -4,12 +4,12 @@
   </div>
   <div class="date-container p-2">
     <span class="text-lg">Auto Date Range</span>
-    <div class="flex my-4">
+    <div class="flex my-4 gap-4">
       <mat-icon (click)="toggleMonthList()">calendar_today</mat-icon>
-      <span class="flex flex-col justify-center items-center">{{selectedMonth}}</span>
+      <span class="flex flex-col justify-end justify-items-end">{{selectedMonth}}</span>
     </div>
     <div *ngIf="showMonthList" class="month-list">
-      <ul>
+      <ul  class="flex flex-col">
         <li *ngFor="let month of months" (click)="selectMonth(month)">{{ month }}</li>
       </ul>
     </div>
